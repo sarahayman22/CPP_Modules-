@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/03 14:51:42 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/04 09:30:29 by saabo-sh         ###   ########.fr       */
+/*   Created: 2025/09/08 13:54:57 by saabo-sh          #+#    #+#             */
+/*   Updated: 2025/09/08 18:00:22 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-
+#ifndef FIXED_HPP
+#define FIXED_HPP
 #include <iostream>
+    
+class fixidPoint
+{
+    private:
+        int                 fixid;
+        static const int    fractionalBits = 8;
+    public:
+        fixidPoint();
+        fixidPoint(const fixidPoint &copy);
+        fixidPoint &operator=(const fixidPoint &assign);
+         ~fixidPoint();
+        int     getRawBits( void ) const;
+        void    setRawBits( int const raw );
+};
 
-int main() {
-    std::cout << "=== Heap Zombie ===" << std::endl;
-    Zombie* heapZombie = newZombie("Heapie\n");
-    std::cout<<"\n";
-    heapZombie->announce();
-     std::cout<<"\n";
-    delete heapZombie;
-    std::cout << "\n=== Stack Zombie ===" << std::endl;
-    randomChump("Stackie\n");
-    return 0;
-}
-
+#endif

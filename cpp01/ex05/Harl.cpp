@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:43:03 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/08/26 16:16:26 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/04 12:49:26 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,15 @@ void Harl::error() {
  
 
 void Harl::complain(std::string level) {
-    // Type alias for readability
     typedef void (Harl::*Action)();
-
-    // Parallel arrays: level names and the member-function pointers
     const std::string names[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
     Action actions[4] = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
 
-    // Pick by matching the string (no if/else forest; a tiny loop is fine)
     for (int i = 0; i < 4; ++i) {
         if (names[i] == level) {
-            (this->*actions[i])();   // call the selected member function on this object
+            (this->*actions[i])();
             return;
         }
     }
-
-    // Optional: how to handle an unknown level
     std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:31:17 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/08/21 19:10:24 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/04 12:41:52 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,23 @@
 #include <string>
 #include "replacer.hpp"
 
-//open a file, read everything inside, and return the contents as a single string.
 bool read_data(const std::string& path, std::string& out)
 {
-    std::ifstream in(path.c_str());   // open file for reading
+    std::ifstream in(path.c_str());  
     if (!in) {
         std::cerr << "Error: cannot open input file: " << path << "\n";
         return false;
     }
 
-    out.clear();                       // make sure output string is empty
+    out.clear();                     
     std::string line;
 
-    while (std::getline(in, line)) {   // read file line by line
-        out += line;                   // add the line text
-        out += '\n';                   // add newline back (getline removes it)
+    while (std::getline(in, line)) { 
+        out += line;                 
+        out += '\n';                  
     }
 
-    return true;                       // success
+    return true;                 
 }
 
 std::string replace_all(const std::string& input, const std::string& s1, const std::string& s2)
@@ -42,13 +41,11 @@ std::string replace_all(const std::string& input, const std::string& s1, const s
         return input;
     }
     std::string out;
-    //With reserve, you avoid repeated reallocations by giving it a big enough buffer from the start.
     out.reserve(input.size());
     
     for (std::size_t i=0; i<input.size();)
     {
         bool match = false;
-        // check if s1 matches starting at position i
         if (i + s1.size() <= input.size())
         {
             match = true;
@@ -63,22 +60,21 @@ std::string replace_all(const std::string& input, const std::string& s1, const s
         }
         if (match)
         {
-            // found s1 at i -> append s2, jump over s1
             out += s2;
             i += s1.size();
         }
         else
         {
-          // no match -> copy one character and move on
             out += input[i];
             ++i;
         }
     }
     return out;
 }
+
 bool write_data(const std::string& path, const std::string& data)
 {
-    std::ofstream out(path.c_str()); // truncates by default
+    std::ofstream out(path.c_str());
     if (!out) {
         std::cerr << "Error: cannot create output file: " << path << "\n";
         return false;

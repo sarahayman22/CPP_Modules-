@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:02:18 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/08/07 18:14:16 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:20:05 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(){
     int N = 5;
-    Zombie* horde = zombieHorde(N,"Zombo");
+    Zombie* horde = zombieHorde(N,"Zombi");
     
     if (!horde)
         return 1;
