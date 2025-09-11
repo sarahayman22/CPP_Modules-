@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:54:37 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/08 18:18:17 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/10 13:46:43 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ fixidPoint::fixidPoint()
 fixidPoint::fixidPoint(const fixidPoint &copy)
 {
     std::cout << "Copy constructor called" << std::endl;
-    *this = copy;
+    *this = copy; // Reuses the assignment operator
 }
 
 fixidPoint &fixidPoint::operator=(const fixidPoint &assign)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    if (this != &assign)
+    if (this != &assign) // Prevent self-assignment
         this->fixid = assign.getRawBits();
     return (*this);
 }
@@ -48,6 +48,5 @@ int fixidPoint::getRawBits( void ) const
 void fixidPoint::setRawBits( int const raw )
 {
     this->fixid = raw;
-    return ;
 }   
 

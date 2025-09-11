@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 18:08:37 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/11 18:06:21 by saabo-sh         ###   ########.fr       */
+/*   Created: 2025/09/11 12:49:36 by saabo-sh          #+#    #+#             */
+/*   Updated: 2025/09/11 18:13:50 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <iostream>
 #include <cmath>
@@ -79,3 +80,58 @@ std::ostream& operator<<(std::ostream& os, const fixidPoint& fp)
     return os;
 }
 
+
+//02 start
+
+
+// operators 
+
+//const means we cannot modify value inside the function.
+//const at the end → means this function does not modify the current object (*this).
+bool Fixed::operator>(const Fixed& value) const 
+{ 
+    return this->raw > value.raw; 
+}
+bool Fixed::operator<(const Fixed& value) const 
+{ 
+    return this->raw < value.raw; 
+}
+bool Fixed::operator>=(const Fixed& value) const 
+{
+     return this->raw >= value.raw; 
+}
+bool Fixed::operator<=(const Fixed& value) const 
+{ 
+    return this->raw <= value.raw;
+}
+bool Fixed::operator==(const Fixed& value) const 
+{ 
+    return this->raw == value.raw; 
+}
+bool Fixed::operator!=(const Fixed& value) const 
+{ 
+    return this->raw != value.raw;
+}
+
+
+
+static  fixidPoint& min (fixidPoint& a, fixidPoint &b)
+ {
+     return (a < b) ? a : b;
+ }
+
+static const fixidPoint& min (const fixidPoint& a, const fixidPoint &b)
+{
+     return (a < b) ? a : b;
+}  
+
+
+static  fixidPoint& max (fixidPoint& a, fixidPoint &b)
+ {
+     return (a > b) ? a : b;
+ }
+
+static const fixidPoint& max (const fixidPoint& a, const fixidPoint &b)
+{
+     return (a > b) ? a : b;
+}  
