@@ -6,13 +6,13 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:09:24 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/18 15:47:00 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/18 15:47:07 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include <iostream>
 #include "ScavTrap.hpp"
-
 ScavTrap::ScavTrap()
     : ClapTrap("ScavTrap") // call ClapTrap default/name ctor
 {
@@ -71,3 +71,4 @@ void ScavTrap::guardGate()
 {
     std::cout << "ScavTrap " << this->name << " is now in Gate keeper mode." << std::endl;
 }
+

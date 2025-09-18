@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/17 18:12:21 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/18 15:46:54 by saabo-sh         ###   ########.fr       */
+/*   Created: 2025/09/18 13:26:37 by saabo-sh          #+#    #+#             */
+/*   Updated: 2025/09/18 15:47:17 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
+#include"ClapTrap.hpp"
 
-#ifndef ScavTrap_HPP
-#define ScavTrap_HPP
-#include <iostream>
-#include "ClapTrap.hpp" 
-
-class ScavTrap : public ClapTrap
+class FragTrap : public ClapTrap
 {
     public:
-         ScavTrap();
-         ScavTrap(const std::string& name);
-         ScavTrap(const ScavTrap& copy);
-         ScavTrap &operator=(const ScavTrap &assign);
-         ~ScavTrap();
+         FragTrap();
+         FragTrap(const std::string& name);
+         FragTrap(const FragTrap& copy);
+         FragTrap &operator=(const FragTrap &assign);
+         ~FragTrap();
 
-           // override attack to print ScavTrap-specific message
+           // override attack to print FragTrap-specific message
          void attack(const std::string& target);
+         void highFivesGuys(void);
+         
 
-          // ScavTrap special ability
-         void guardGate();
+        
 };
 
 #endif
+

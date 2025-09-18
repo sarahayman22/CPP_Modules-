@@ -6,23 +6,23 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:06:18 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/17 15:28:30 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/18 15:09:17 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main()
 {
-    ClapTrap a("AAA");
-    ClapTrap b("BBB");
+    ScavTrap a("AAA");
+    ScavTrap b("BBB");
 
     a.setAttackDamage(4);
     b.setAttackDamage(2);
 
     // Normal attack
     a.attack("a training dummy");
-    // Bravo takes damage (we're just simulating, not interacting ClapTrap instances directly as per spec)
+    // Bravo takes damage (we're just simulating, not interacting ScavTrap instances directly as per spec)
     b.takeDamage(3);
 
     // Repair
@@ -42,8 +42,8 @@ int main()
     a.beRepaired(5);
 
     // Test copy and assign
-    ClapTrap c = b; // copy constructor
-    ClapTrap d;
+    ScavTrap c = b; // copy constructor
+    ScavTrap d;
     d = b; // assignment
 
     return 0;

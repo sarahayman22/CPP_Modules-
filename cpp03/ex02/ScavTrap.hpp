@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:12:21 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/18 15:46:54 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:07:20 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ class ScavTrap : public ClapTrap
          ScavTrap &operator=(const ScavTrap &assign);
          ~ScavTrap();
 
-           // override attack to print ScavTrap-specific message
          void attack(const std::string& target);
-
-          // ScavTrap special ability
          void guardGate();
 };
 
