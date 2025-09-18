@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/18 18:33:38 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:36:18 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static const int DIAMOND_AD = 30;
 //This calls ClapTrap’s constructor with "default_clap_name" → so inside the hidden ClapTrap object, the name field becomes "default_clap_name".
 
 
-DiamondTrap::DiamondTrap(): ClapTrap("default_clap_name"), FragTrap(), ScavTrap(), name("default")
+DiamondTrap::DiamondTrap()
+:ClapTrap("default_clap_name"), FragTrap(), ScavTrap(), name("default")
 {
 
     this->hitPoints = DIAMOND_HP;
