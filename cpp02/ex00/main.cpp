@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:54:23 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/08 18:10:07 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/14 13:30:41 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <iostream>
 
 int main( void ) {
-fixidPoint a;
-fixidPoint b( a );
-fixidPoint c;
+Fixed a;
+Fixed b( a );
+Fixed c;
 c = b;
 std::cout << a.getRawBits() << std::endl;
 std::cout << b.getRawBits() << std::endl;

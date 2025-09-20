@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:54:57 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/08 18:00:22 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:42:24 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #define FIXED_HPP
 #include <iostream>
     
-class fixidPoint
+class Fixed
 {
     private:
         int                 fixid;
         static const int    fractionalBits = 8;
     public:
-        fixidPoint();
-        fixidPoint(const fixidPoint &copy);
-        fixidPoint &operator=(const fixidPoint &assign);
-         ~fixidPoint();
+        Fixed();
+        Fixed(const Fixed &copy);
+        Fixed &operator=(const Fixed &assign);
+         ~Fixed();
         int     getRawBits( void ) const;
         void    setRawBits( int const raw );
 };

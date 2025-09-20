@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:08:37 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/11 18:06:21 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/14 13:34:03 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,66 @@
 #include <cmath>
 #include "Fixed.hpp"
 
-fixidPoint::fixidPoint() : fixid(0)
+Fixed::Fixed() : fixid(0)
 {
       std::cout << "Default constructor called" << std::endl;
 }
 
-fixidPoint::fixidPoint(const int intvalue)
+Fixed::Fixed(const int intvalue)
 {
     std::cout << "Int constructor called" << std::endl;
-    fixid = intvalue << fractionalBits; //shift the int left by 8 bits == *2^8
+    fixid = intvalue << fractionalBits;
 }
 
-fixidPoint::fixidPoint(const float floatvalue)
+Fixed::Fixed(const float floatvalue)
 {
     std::cout << "Float constructor called" << std::endl;
-    fixid = roundf(floatvalue *(1 << fractionalBits));
+    fixid = static_cast<int>(roundf(floatvalue *(1 << fractionalBits)));
     
 }
 
-float   fixidPoint::toFloat( void ) const 
+float   Fixed::toFloat( void ) const 
 {
-    return ((float)fixid / (1 << fractionalBits));
+    return ( static_cast<float>(fixid) / (1 << fractionalBits));
 }
 
- int fixidPoint::toInt() const 
+ int Fixed::toInt() const 
 {    
-    return (fixid >> fractionalBits); // shift right by 8 bits
+    return (fixid >> fractionalBits); 
 }
  
 
-fixidPoint::fixidPoint(const fixidPoint &copy)
+Fixed::Fixed(const Fixed &copy)
 {
     std::cout << "Copy constructor called" << std::endl;
-    *this = copy; // Reuses the assignment operator
+    *this = copy;
 }
 
-fixidPoint &fixidPoint::operator=(const fixidPoint &assign)
+Fixed &Fixed::operator=(const Fixed &assign)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    if (this != &assign) // Prevent self-assignment
+    if (this != &assign)
         this->fixid = assign.getRawBits();
     return (*this);
 }
 
-fixidPoint::~fixidPoint()
+Fixed::~Fixed()
 {
     std::cout << "Destructor called" << std::endl;
     return ;
 }
 
-int fixidPoint::getRawBits( void ) const
+int Fixed::getRawBits( void ) const
 {
     return (this->fixid);
 }
 
-void fixidPoint::setRawBits( int const raw )
+void Fixed::setRawBits( int const raw )
 {
     this->fixid = raw;
 }   
 
-std::ostream& operator<<(std::ostream& os, const fixidPoint& fp)
+std::ostream& operator<<(std::ostream& os, const Fixed& fp)
 {
     os << fp.toFloat();
     return os;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:08:06 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/11 12:36:07 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/14 13:32:14 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 int main( void ) {
     
-fixidPoint a;
-fixidPoint const b( 10 );
-fixidPoint const c( 42.42f );
-fixidPoint const d( b );
-a = fixidPoint( 1234.4321f );
+Fixed a;
+Fixed const b( 10 );
+Fixed const c( 42.42f );
+Fixed const d( b );
+a = Fixed( 1234.4321f );
 
 std::cout << "a is " << a << std::endl;
 std::cout << "b is " << b << std::endl;

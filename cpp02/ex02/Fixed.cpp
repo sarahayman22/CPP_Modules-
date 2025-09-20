@@ -6,132 +6,142 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 12:49:36 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/11 18:13:50 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/14 16:14:28 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <iostream>
-#include <cmath>
 #include "Fixed.hpp"
+#include <cmath>
 
-fixidPoint::fixidPoint() : fixid(0)
-{
-      std::cout << "Default constructor called" << std::endl;
+Fixed::Fixed() : fixed(0) {}
+
+Fixed::Fixed(const Fixed& other) {
+    *this = other;
 }
 
-fixidPoint::fixidPoint(const int intvalue)
-{
-    std::cout << "Int constructor called" << std::endl;
-    fixid = intvalue << fractionalBits; //shift the int left by 8 bits == *2^8
+Fixed& Fixed::operator=(const Fixed& other) {
+    if (this != &other)
+        this->fixed = other.getRawBits();
+    return *this;
 }
 
-fixidPoint::fixidPoint(const float floatvalue)
-{
-    std::cout << "Float constructor called" << std::endl;
-    fixid = roundf(floatvalue *(1 << fractionalBits));
-    
+Fixed::~Fixed() {}
+
+// ---------- Converters ----------
+Fixed::Fixed(const int intValue) {
+    this->fixed = intValue << fractBits;
 }
 
-float   fixidPoint::toFloat( void ) const 
-{
-    return ((float)fixid / (1 << fractionalBits));
+Fixed::Fixed(const float floatValue) {
+    this->fixed = static_cast<int>(roundf(floatValue * (1 << fractBits)));
 }
 
- int fixidPoint::toInt() const 
-{    
-    return (fixid >> fractionalBits); // shift right by 8 bits
-}
- 
-
-fixidPoint::fixidPoint(const fixidPoint &copy)
-{
-    std::cout << "Copy constructor called" << std::endl;
-    *this = copy; // Reuses the assignment operator
+float Fixed::toFloat() const {
+    return static_cast<float>(fixed) / (1 << fractBits);
 }
 
-fixidPoint &fixidPoint::operator=(const fixidPoint &assign)
-{
-    std::cout << "Copy assignment operator called" << std::endl;
-    if (this != &assign) // Prevent self-assignment
-        this->fixid = assign.getRawBits();
-    return (*this);
+int Fixed::toInt() const {
+    return fixed >> fractBits;
 }
 
-fixidPoint::~fixidPoint()
-{
-    std::cout << "Destructor called" << std::endl;
-    return ;
+// ---------- Raw access ----------
+int Fixed::getRawBits() const {
+    return fixed;
 }
 
-int fixidPoint::getRawBits( void ) const
-{
-    return (this->fixid);
+void Fixed::setRawBits(int const raw) {
+    fixed = raw;
 }
 
-void fixidPoint::setRawBits( int const raw )
-{
-    this->fixid = raw;
-}   
+// ---------- Comparison operators ----------
+bool Fixed::operator>(const Fixed& other) const 
+{ 
+    return fixed > other.fixed;
+}
+bool Fixed::operator<(const Fixed& other) const 
+{ 
+    return fixed < other.fixed;
+}
+bool Fixed::operator>=(const Fixed& other) const 
+{ 
+    return fixed >= other.fixed; 
+}
+bool Fixed::operator<=(const Fixed& other) const 
+{ 
+    return fixed <= other.fixed; 
+}
+bool Fixed::operator==(const Fixed& other) const 
+{ 
+    return fixed == other.fixed; 
+}
+bool Fixed::operator!=(const Fixed& other) const 
+{ 
+    return fixed != other.fixed; 
+}
 
-std::ostream& operator<<(std::ostream& os, const fixidPoint& fp)
-{
+// ---------- Arithmetic operators ----------
+Fixed Fixed::operator+(const Fixed& other) const {
+    Fixed result;
+    result.setRawBits(this->fixed + other.fixed);
+    return result;
+}
+
+Fixed Fixed::operator-(const Fixed& other) const {
+    Fixed result;
+    result.setRawBits(this->fixed - other.fixed);
+    return result;
+}
+
+Fixed Fixed::operator*(const Fixed& other) const {
+    return Fixed(this->toFloat() * other.toFloat());
+}
+
+Fixed Fixed::operator/(const Fixed& other) const {
+    return Fixed(this->toFloat() / other.toFloat());
+}
+
+// ---------- Increment / Decrement ----------
+Fixed& Fixed::operator++() { 
+    ++fixed;
+    return *this;
+}
+
+Fixed Fixed::operator++(int) { 
+    Fixed old(*this);
+    fixed++;
+    return old;
+}
+
+Fixed& Fixed::operator--() {
+    --fixed;
+    return *this;
+}
+
+Fixed Fixed::operator--(int) {
+    Fixed old(*this);
+    fixed--;
+    return old;
+}
+
+// ---------- Min / Max ----------
+Fixed& Fixed::min(Fixed& a, Fixed& b) {
+    return (a < b) ? a : b;
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
+    return (a < b) ? a : b;
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b) {
+    return (a > b) ? a : b;
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
+    return (a > b) ? a : b;
+}
+
+// ---------- Stream insertion ----------
+std::ostream& operator<<(std::ostream& os, const Fixed& fp) {
     os << fp.toFloat();
     return os;
 }
-
-
-//02 start
-
-
-// operators 
-
-//const means we cannot modify value inside the function.
-//const at the end → means this function does not modify the current object (*this).
-bool Fixed::operator>(const Fixed& value) const 
-{ 
-    return this->raw > value.raw; 
-}
-bool Fixed::operator<(const Fixed& value) const 
-{ 
-    return this->raw < value.raw; 
-}
-bool Fixed::operator>=(const Fixed& value) const 
-{
-     return this->raw >= value.raw; 
-}
-bool Fixed::operator<=(const Fixed& value) const 
-{ 
-    return this->raw <= value.raw;
-}
-bool Fixed::operator==(const Fixed& value) const 
-{ 
-    return this->raw == value.raw; 
-}
-bool Fixed::operator!=(const Fixed& value) const 
-{ 
-    return this->raw != value.raw;
-}
-
-
-
-static  fixidPoint& min (fixidPoint& a, fixidPoint &b)
- {
-     return (a < b) ? a : b;
- }
-
-static const fixidPoint& min (const fixidPoint& a, const fixidPoint &b)
-{
-     return (a < b) ? a : b;
-}  
-
-
-static  fixidPoint& max (fixidPoint& a, fixidPoint &b)
- {
-     return (a > b) ? a : b;
- }
-
-static const fixidPoint& max (const fixidPoint& a, const fixidPoint &b)
-{
-     return (a > b) ? a : b;
-}  
