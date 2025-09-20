@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:49 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/18 18:05:13 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/20 14:26:24 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ class DiamondTrap : public FragTrap, public ScavTrap
         ~DiamondTrap();
 
         void attack(const std::string& target);
-        void whoAmI() const;
-        void showStats() const;
-    
+        void whoAmI() const;    
 
 };
 

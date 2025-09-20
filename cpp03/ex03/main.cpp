@@ -6,42 +6,34 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 13:24:36 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/18 15:58:22 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/20 14:32:13 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
-int main()
-{
-    // Create two FragTraps
-    FragTrap AAA("AAA");
-    FragTrap BBB("BBB");
+int main() {
+    std::cout << "=== Creating default DiamondTrap ===\n";
+    DiamondTrap d1;                       
+    d1.whoAmI();
 
-    // AAA attacks BBB
-    AAA.setAttackDamage(5);
-    AAA.attack("BBB");
-    BBB.takeDamage(5);
+    std::cout << "\n=== Creating named DiamondTrap ===\n";
+    DiamondTrap d2("Spark");             
 
-    // BBB repairs itself
-    BBB.beRepaired(3);
+    std::cout << "\n=== Testing attack ===\n";
+    d2.attack("an enemy");                
+    d2.takeDamage(20);                   
+    d2.beRepaired(15);                    
 
-    // AAA depletes energy with multiple attacks
-    for (int i = 0; i < 5; ++i)
-        AAA.attack("target");
+    std::cout << "\n=== Testing copy constructor ===\n";
+    DiamondTrap d3(d2);                 
+    d3.whoAmI();
 
-    // Destroy BBB
-    BBB.takeDamage(50);
-    BBB.attack("someone");  // should fail
-    BBB.beRepaired(10);     // should fail
+    std::cout << "\n=== Testing assignment operator ===\n";
+    d1 = d3;                             
+    d1.whoAmI();
 
-    // Test copy and assignment
-    FragTrap copy = AAA;    // copy constructor
-    FragTrap assign;
-    assign = AAA;           // assignment operator
-
-    // High five demonstration
-    copy.highFivesGuys();
-
+    std::cout << "\n=== All tests finished ===\n";
     return 0;
 }
+

@@ -1,7 +1,7 @@
 NAME = Fixed
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -I./include -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror  -std=c++98
 
 SRC =  Fixed.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)

@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/18 18:36:18 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/20 14:29:54 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,21 @@ DiamondTrap::~DiamondTrap()
     std::cout << "DiamondTrap " << this->name << " destroyed\n";
 }
 
+void DiamondTrap::attack(const std::string &target)
+{
+    if (this->hitPoints > 0 && this->energyPoints > 0)
+    {
+        this->energyPoints--;
+        std::cout << "DiamondTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+    }
+    else
+    {
+        std::cout << "DiamondTrap " << this->name << " is out of energy or hit points!" << std::endl;
+    }
+}
+
+void DiamondTrap::whoAmI() const
+{
+    std::cout << "DiamondTrap name: " << this->name
+              << " | ClapTrap name: " << this->ClapTrap::name << std::endl;
+}
