@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:31 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/20 18:42:43 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/21 13:07:04 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@
 
 class Dog : public Animal
 {
-    Dog();
-    Dog(const Dog& copy);
-    Dog &operator=(const Dog &assign);
-    ~Dog();
+    public:
+        Dog();
+        Dog(const Dog& copy);
+        Dog &operator=(const Dog &assign);
+        ~Dog();
     
-    void makeSound();
-    
-
+        void makeSound() const;
 };
 
 #endif 

@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:26:08 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/21 13:39:38 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:53:32 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 Cat::Cat() : Animal()
 {
     this->type = "Cat";
+    this->brain = new Brain();
     std::cout << "[Cat] Constructor Called" << std :: endl;
 }
 
 Cat::Cat(std::string type) : Animal()
 {
     this->type = type;
+    this->brain = new Brain(type.brain);
     std :: cout << "[Cat] parameterized Constructor Called" << std :: endl;
 }
 
@@ -45,4 +47,10 @@ void Cat::makeSound() const
 Cat::~Cat()
 {
     std :: cout << "[Cat] Destructor Called" << std :: endl;
+}
+
+
+Brain *Cat::getBrain()
+{
+    return this->brain;
 }

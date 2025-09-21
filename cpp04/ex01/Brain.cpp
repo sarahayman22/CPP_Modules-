@@ -1,29 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/20 17:26:17 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/21 12:51:44 by saabo-sh         ###   ########.fr       */
+/*   Created: 2025/09/21 18:07:15 by saabo-sh          #+#    #+#             */
+/*   Updated: 2025/09/21 18:07:16 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
-
-#include "Animal.hpp"
-
-class Cat : public Animal
-{
-    public:
-        Cat();
-        Cat(std::string type);
-        Cat(const Cat &copy);
-        Cat &operator=(const Cat &obj);
-        ~Cat();
-        void makeSound() const;
-};
-
-#endif
