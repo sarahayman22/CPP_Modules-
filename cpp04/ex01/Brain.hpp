@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 18:07:33 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/21 18:29:07 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/23 12:26:55 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 class Brain {
 private:
-    std::string ideas[100];
-
+        static const int N = 100;
+        std::string ideas[N];
 public:
     Brain();
     Brain(const Brain& other);

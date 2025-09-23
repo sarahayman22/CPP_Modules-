@@ -6,51 +6,73 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:26:08 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/21 18:53:32 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:19:04 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : Animal()
+
+Cat::Cat() : Animal(), brain(new Brain())
 {
     this->type = "Cat";
-    this->brain = new Brain();
-    std::cout << "[Cat] Constructor Called" << std :: endl;
+    std::cout << "[Cat] Default Constructor Called" << std::endl;
 }
 
-Cat::Cat(std::string type) : Animal()
+Cat::Cat(const std::string &type) : Animal(), brain(new Brain())
 {
     this->type = type;
-    this->brain = new Brain(type.brain);
-    std :: cout << "[Cat] parameterized Constructor Called" << std :: endl;
+    std::cout << "[Cat] Parameterized Constructor Called" << std::endl;
 }
 
-Cat::Cat(const Cat &copy) : Animal()
+// Deep copy: allocate a new Brain copying other's Brain
+Cat::Cat(const Cat &copy) : Animal(), brain(NULL)
 {
-    std :: cout << "[Cat] Copy Constructor Called" << std :: endl;
+    std::cout << "[Cat] Copy Constructor Called" << std::endl;
     this->type = copy.type;
+    if (copy.brain)
+        brain = new Brain(*copy.brain);
+    else
+        brain = new Brain();
 }
 
+// Assignment operator with self-assignment guard and deep copy
 Cat &Cat::operator=(const Cat &obj)
 {
-    std :: cout << "[Cat] Assignment Operator Called" << std :: endl;
+    std::cout << "[Cat] Assignment Operator Called" << std::endl;
+    if (this == &obj)
+        return *this;
+
+    // copy base fields we rely on (type is usually in Animal)
     this->type = obj.type;
-    return (*this);
+
+    // Replace brain safely: delete old, copy new
+    delete brain;
+    if (obj.brain)
+        brain = new Brain(*obj.brain);
+    else
+        brain = new Brain();
+
+    return *this;
 }
 
 void Cat::makeSound() const
 {
-    std :: cout << "Sound of Cat : " << "Meow Meow ..." << std :: endl;
+    std::cout << "[Cat] Meow Meow ..." << std::endl;
 }
 
 Cat::~Cat()
 {
-    std :: cout << "[Cat] Destructor Called" << std :: endl;
+    std::cout << "[Cat] Destructor Called" << std::endl;
+    delete brain;
 }
-
 
 Brain *Cat::getBrain()
 {
-    return this->brain;
+    return brain;
+}
+
+const Brain *Cat::getBrain() const
+{
+    return brain;
 }

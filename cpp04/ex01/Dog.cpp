@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:21 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/21 18:53:07 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:18:06 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ Dog &Dog::operator=(const Dog &assign)
 
 Dog::~Dog()
 {
-     std::cout << "[Dog] Destructor called\n"; }
+     delete brain;
+     std::cout << "[Dog] Destructor called\n";
+}
 
 void Dog::makeSound() const 
 {
