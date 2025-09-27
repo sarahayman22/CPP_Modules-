@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 16:26:08 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/21 12:33:41 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:22:25 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Animal::~Animal()
 
 void Animal::makeSound() const
 {
-    std::cout << "Animal sound*\n";
+    std::cout << "Animal sound\n";
 }
 
 std::string Animal::getType() const

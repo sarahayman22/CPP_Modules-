@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:06:18 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/17 15:28:30 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:53:33 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ int main()
 
     // Normal attack
     a.attack("a training dummy");
-    // Bravo takes damage (we're just simulating, not interacting ClapTrap instances directly as per spec)
+    
+    // BBB takes damage (we're just simulating, not interacting ClapTrap instances directly as per spec)
     b.takeDamage(3);
 
     // Repair
     b.beRepaired(5);
-
-    // Deplete Alpha's energy by attacking until energy gone
+    
+    // Deplete AAA energy by attacking until energy gone
     for (int i = 0; i < 11; ++i) // 10 energy points initially
     {
         a.attack("target");
     }
-
+ 
     // Damage Alpha until destroyed
     a.takeDamage(100);
 
@@ -42,9 +43,9 @@ int main()
     a.beRepaired(5);
 
     // Test copy and assign
-    ClapTrap c = b; // copy constructor
+    ClapTrap c = b;
     ClapTrap d;
-    d = b; // assignment
+    d = b; 
 
     return 0;
 }

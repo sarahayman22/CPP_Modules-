@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:09:54 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/20 14:29:54 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:13:55 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 static const int DIAMOND_HP = 100;  
 static const int DIAMOND_EP = 50;  
 static const int DIAMOND_AD = 30;
-
-//ClapTrap("default_clap_name")
-
-//Because FragTrap and ScavTrap inherit from ClapTrap virtually, DiamondTrap must decide how to initialize the single shared ClapTrap subobject.
-
-//This calls ClapTrap’s constructor with "default_clap_name" → so inside the hidden ClapTrap object, the name field becomes "default_clap_name".
-
 
 DiamondTrap::DiamondTrap()
 :ClapTrap("default_clap_name"), FragTrap(), ScavTrap(), name("default")

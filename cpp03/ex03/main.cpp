@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 13:24:36 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/20 14:32:13 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:17:58 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int main() {
     std::cout << "\n=== Testing assignment operator ===\n";
     d1 = d3;                             
     d1.whoAmI();
-
-    std::cout << "\n=== All tests finished ===\n";
+    
     return 0;
 }
 

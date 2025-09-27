@@ -16,7 +16,7 @@
 
 int main() {
     std::cout << "=== Heap Zombie ===" << std::endl;
-    Zombie* heapZombie = newZombie("Heapie\n");
+    Zombie* heapZombie = newZombie("");
     std::cout<<"\n";
     heapZombie->announce();
      std::cout<<"\n";

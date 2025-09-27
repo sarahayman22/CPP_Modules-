@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:26:08 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/23 16:19:04 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:29:26 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,14 @@ Cat::Cat(const Cat &copy) : Animal(), brain(NULL)
         brain = new Brain();
 }
 
-// Assignment operator with self-assignment guard and deep copy
 Cat &Cat::operator=(const Cat &obj)
 {
     std::cout << "[Cat] Assignment Operator Called" << std::endl;
     if (this == &obj)
         return *this;
 
-    // copy base fields we rely on (type is usually in Animal)
     this->type = obj.type;
 
-    // Replace brain safely: delete old, copy new
     delete brain;
     if (obj.brain)
         brain = new Brain(*obj.brain);
