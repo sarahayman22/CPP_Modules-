@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:55 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/29 18:53:41 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:32:02 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define  FORM_HPP
 #include<iostream>
 #include <string>
+
+class Bureaucrat; // forward declaration to avoid circular include
 
 class Form
 {
@@ -23,12 +25,31 @@ class Form
     const int gradeExe;
 
     public:
-    Form();
-    Form(const std::string& name, const int gradeSign, const int gradeExe);
-    Form& operator=(const Form &assign);
-    ~Form();
-    
-};
+        Form();
+        Form(const std::string& name, const int gradeSign, const int gradeExe);
+        Form(const Form &copy);
+        Form& operator=(const Form &assign);
+        ~Form();
+
+        // Exceptions
+        class GradeTooHighException : public std::exception {
+        public:
+            virtual const char* what() const throw();
+         };
+        class GradeTooLowException : public std::exception {
+        public:
+            virtual const char* what() const throw();
+        };
         
+        // Getters
+        const std::string &getName() const;
+        bool isSigned() const;
+        int getGradeToSign() const;
+        int getGradeToExecute() const;
+
+        // Actions
+        void beSigned(Bureaucrat const &b); // throws GradeTooLowException if b's grade too low
+};
+std::ostream &operator<<(std::ostream &os, Form const &f);
 
 #endif 
