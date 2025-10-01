@@ -6,83 +6,51 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:22:01 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/29 17:31:26 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:55:51 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+
+// main.cpp
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include <iostream>
 
 int main()
 {
-    try 
-    {
-        Bureaucrat sara("sara", 42);
-        std::cout<< sara << std::endl;
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "exception: "<< e.what()<< std::endl;
-        
-    }
-    std::cout <<"**********************************************"<<std::endl;
-    try
-    {
-        Bureaucrat a("high",0);
-        std::cout<< a <<std::endl;
-    }
-    catch (std::exception &e)
-    {
-        std::cout<< "caught: " <<e.what()<<std::endl;
-    }
-    std::cout <<"**********************************************"<<std::endl;
-    try 
-    {
-        Bureaucrat b("low", 151);
-        std::cout<< b<< std::endl;
-    }
-    catch (std::exception &e)
-    {
-        std::cout<< "caught: " << e.what() << std::endl;
-    }
-    std::cout <<"**********************************************"<<std::endl;
-     try {
-        Bureaucrat d("NearTop", 2);
-        std::cout << d << std::endl;
-        d.incrementGrade(); // should go to 1
-        std::cout << "after increment: " << d << std::endl;
-        d.incrementGrade(); // should throw
-        std::cout << "after increment2: " << d << std::endl;
-    } catch (std::exception &e) {
-        std::cout << "Caught: " << e.what() << std::endl;
-    }
-    std::cout <<"**********************************************"<<std::endl;
-     try {
-        Bureaucrat e("NearBottom", 149);
-        std::cout << e << std::endl;
-        e.decrementGrade(); // -> 150
-        std::cout << "after decrement: " << e << std::endl;
-        e.decrementGrade(); // -> should throw
-        std::cout << "after decrement2: " << e << std::endl;
-    } catch (std::exception &ex) {
-        std::cout << "Caught: " << ex.what() << std::endl;
-    }
-std::cout <<"**********************************************"<<std::endl;
-       try {
-        Bureaucrat orig("Alice", 10);
-        Bureaucrat copy = orig; // copy ctor
-        std::cout << "orig: " << orig << "\ncopy: " << copy << std::endl;
+    try {
+        Bureaucrat alice("Alice", 3);
+        Form formA("FormA", 5, 10);
 
-        Bureaucrat target("TargetName", 50);
-        std::cout << "before assign target: " << target << std::endl;
-        target = orig; // assignment (note: name may remain TargetName if name is const)
-        std::cout << "after assign target: " << target << std::endl;
+        std::cout << formA << std::endl;          // not signed
+        alice.signForm(formA);                    // should succeed because 3 <= 5
+        std::cout << formA << std::endl;          // signed
 
-        // Change copy's grade and show orig unchanged
-        copy.decrementGrade(); // copy.grade++
-        std::cout << "after modifying copy: orig: " << orig << ", copy: " << copy << std::endl;
+        Bureaucrat bob("Bob", 10);
+        Form formB("TopSecret", 5, 1);
+        bob.signForm(formB);                      // should fail: 10 > 5
+
+        // boundary: exact grade allowed
+        Bureaucrat carol("Carol", 5);
+        Form formC("Boundary", 5, 5);
+        carol.signForm(formC);                    // should succeed (equal)
+
     } catch (std::exception &e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        std::cerr << "Caught exception in main: " << e.what() << std::endl;
     }
+
+    // test constructor exceptions
+    try {
+        Form bad("BadForm", 0, 10); // grade 0 -> GradeTooHighException
+    } catch (std::exception &e) {
+        std::cerr << "Expected constructor error: " << e.what() << std::endl;
+    }
+
+    try {
+        Form bad2("BadForm2", 151, 10); // grade 151 -> GradeTooLowException
+    } catch (std::exception &e) {
+        std::cerr << "Expected constructor error: " << e.what() << std::endl;
+    }
+
     return 0;
 }

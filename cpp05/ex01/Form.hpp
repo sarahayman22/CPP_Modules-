@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:55 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/30 18:32:02 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:56:13 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Form
     const int gradeExe;
 
     public:
-        Form();
+    //    Form();
         Form(const std::string& name, const int gradeSign, const int gradeExe);
         Form(const Form &copy);
         Form& operator=(const Form &assign);
@@ -51,5 +51,6 @@ class Form
         void beSigned(Bureaucrat const &b); // throws GradeTooLowException if b's grade too low
 };
 std::ostream &operator<<(std::ostream &os, Form const &f);
+
 
 #endif 

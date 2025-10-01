@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:21:49 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/29 16:33:16 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:03:12 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include<iostream>
 #include <string>
 
+class Form;
 class Bureaucrat
 {
     const std::string name;
@@ -43,6 +44,8 @@ class Bureaucrat
         public:
             const char *what () const throw();
     };
+
+    void signForm(Form &form) const;
 
 };
     std::ostream& operator<<(std::ostream& os, const Bureaucrat& fp);

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:43 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/30 18:37:55 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:56:07 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"Form.hpp"
 #include "Bureaucrat.hpp" // full type needed here
+#include <sstream>
 
 Form::Form(const std::string &name, int gradeSign, int gradeExe)
     :name(name),sign(false),gradeSign(gradeSign),gradeExe(gradeExe)
@@ -49,10 +50,30 @@ const char* Form::GradeTooLowException::what() const throw()
 {
     return "Form grade too low";
 }
+//Getters
+const std::string &Form::getName() const 
+    { return name; }
+bool Form::isSigned() const 
+    { return sign;}
+int Form::getGradeToSign() const 
+    { return gradeSign; }
+int Form::getGradeToExecute() const 
+    { return gradeExe; }
 
-const std::string &Form::getName() const { return name; }
-bool Form::isSigned() const { return sign;}
-int Form::getGradeToSign() const { return gradeSign; }
-int Form::getGradeToExecute() const { return gradeExe; }
+void Form::beSigned(Bureaucrat const &b)
+ {
+     // Bureaucrat::getGrade() returns an int where 1 is highest
+     if (b.getGrade() > gradeSign)// numeric greater -> worse grade -> too low
+        throw GradeTooLowException();
+    sign = true;
+ }
 
+std::ostream &operator<<(std::ostream &os, Form const &f)
+{
+    os << "Form \"" <<f.getName() << "\" , signed: "
+     << (f.isSigned() ? "yes" : "no")
+     << ", grade to sign: " << f.getGradeToSign()
+     << ", grade to execute: " << f.getGradeToExecute();
+    return os;
+}
 
