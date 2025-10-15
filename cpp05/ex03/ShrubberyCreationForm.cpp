@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:34:23 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/13 14:43:50 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/13 18:53:27 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ShrubberyCreationForm.hpp"
 
-static const int SIGN_GRADE = 145;
-static const int EXEC_GRADE  = 137;
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("ShrubberyCreationForm", SIGN_GRADE, EXEC_GRADE), target("default")
+: AForm("ShrubberyCreationForm", 145, 137), target("default")
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& t)
-    : AForm("ShrubberyCreationForm", SIGN_GRADE, EXEC_GRADE), target(t)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& tgt)
+: AForm("ShrubberyCreationForm", 145, 137), target(tgt)
 {
 }
 
@@ -40,9 +38,6 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     return *this;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {}
-
-// --- Helper function: recursive directory printing ---
 static void printDirectory(std::ofstream& out, const std::string& path, const std::string& prefix)
 {
     DIR* dir = opendir(path.c_str());

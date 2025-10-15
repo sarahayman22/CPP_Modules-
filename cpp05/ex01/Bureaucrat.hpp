@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:21:49 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/01 18:03:12 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/06 09:45:52 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ class Bureaucrat
 
     class GradeTooHighException : public std::exception 
     {
-        public:
             const char *what() const throw();      
     };
     
     class GradeTooLowExcption : public std::exception
     {
-        public:
             const char *what () const throw();
     };
 

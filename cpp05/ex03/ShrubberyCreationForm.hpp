@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:34:43 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/13 14:16:46 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/13 18:51:01 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <dirent.h>
+#include <dirent.h>cd 
 #include <sys/stat.h>
 
 class ShrubberyCreationForm : public AForm {
@@ -29,9 +29,9 @@ class ShrubberyCreationForm : public AForm {
         ShrubberyCreationForm(const std::string& target);
         ShrubberyCreationForm(const ShrubberyCreationForm& other);
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
-        ~ShrubberyCreationForm();
+        virtual ~ShrubberyCreationForm();
 
-         void executeAction() const  ;
+         virtual void executeAction() const  ;
 };
 
 #endif

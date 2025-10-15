@@ -6,12 +6,12 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:43 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/11 18:34:58 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/13 14:25:14 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"AForm.hpp"
-#include "Bureaucrat.hpp" // full type needed here
+#include "Bureaucrat.hpp"
 #include <sstream>
 
 AForm::AForm() : 

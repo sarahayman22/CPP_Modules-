@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:21:49 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/05 18:47:07 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:46:43 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #define BUREAUCRAT_HPP
 #include<iostream>
 #include <string>
+//#include "AForm.hpp"
 
+class AForm;
 class Bureaucrat
 {
     const std::string name;
@@ -34,7 +36,6 @@ class Bureaucrat
 
     class GradeTooHighException : public std::exception 
     {
-        
             const char *what() const throw();      
     };
     
@@ -42,6 +43,9 @@ class Bureaucrat
     {
             const char *what () const throw();
     };
+
+     void signForm(AForm &form) const;
+     void executeForm(AForm const &form) const;
 
 };
     std::ostream& operator<<(std::ostream& os, const Bureaucrat& fp);
