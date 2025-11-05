@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:34:23 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/13 18:53:27 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:21:44 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     }
     return *this;
 }
+
+ShrubberyCreationForm::~ShrubberyCreationForm() {
+    std::cout << "ShrubberyCreationForm: Destructor called\n";
+}
+
 
 static void printDirectory(std::ofstream& out, const std::string& path, const std::string& prefix)
 {

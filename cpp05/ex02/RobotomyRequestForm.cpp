@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:35:00 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/13 14:43:28 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:18:44 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 #include <iostream>
-#include <cstdlib>  // for rand(), srand()
-#include <ctime>    // for time()
+#include <cstdlib>  
+#include <ctime>   
 
 RobotomyRequestForm::RobotomyRequestForm()
     : AForm("RobotomyRequestForm", 72, 45), target("default")
@@ -55,7 +55,7 @@ void RobotomyRequestForm::executeAction() const
     
     std::srand(std::time(NULL));
     if(std::rand() % 2)
-        std::cout << target << "Has been robotomized successfully!\n";
+        std::cout << target << " Has been robotomized successfully!\n";
     else
-        std::cout << "Robotomy faild on" << target << "...\n";
+        std::cout << " Robotomy faild on " << target << "...\n";
 }

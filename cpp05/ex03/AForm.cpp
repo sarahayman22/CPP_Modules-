@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:43 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/13 14:25:14 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/22 18:42:05 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int AForm::getGradeToExecute() const
 
 void AForm::beSigned(Bureaucrat const &b)
  {
-     // Bureaucrat::getGrade() returns an int where 1 is highest
-     if (b.getGrade() > gradeSign)// numeric greater -> worse grade -> too low
+     if (b.getGrade() > gradeSign)
         throw AForm::GradeTooLowException();
     sign = true;
  }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:22:01 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/09/29 17:31:26 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/18 17:36:12 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int main()
      try {
         Bureaucrat d("NearTop", 2);
         std::cout << d << std::endl;
-        d.incrementGrade(); // should go to 1
+        d.incrementGrade(); 
         std::cout << "after increment: " << d << std::endl;
-        d.incrementGrade(); // should throw
+        d.incrementGrade();
         std::cout << "after increment2: " << d << std::endl;
     } catch (std::exception &e) {
         std::cout << "Caught: " << e.what() << std::endl;
@@ -60,26 +60,25 @@ int main()
      try {
         Bureaucrat e("NearBottom", 149);
         std::cout << e << std::endl;
-        e.decrementGrade(); // -> 150
+        e.decrementGrade();
         std::cout << "after decrement: " << e << std::endl;
-        e.decrementGrade(); // -> should throw
+        e.decrementGrade();
         std::cout << "after decrement2: " << e << std::endl;
     } catch (std::exception &ex) {
         std::cout << "Caught: " << ex.what() << std::endl;
     }
 std::cout <<"**********************************************"<<std::endl;
        try {
-        Bureaucrat orig("Alice", 10);
-        Bureaucrat copy = orig; // copy ctor
+        Bureaucrat orig("Orignal", 10);
+        Bureaucrat copy = orig;
         std::cout << "orig: " << orig << "\ncopy: " << copy << std::endl;
 
         Bureaucrat target("TargetName", 50);
         std::cout << "before assign target: " << target << std::endl;
-        target = orig; // assignment (note: name may remain TargetName if name is const)
+        target = orig;
         std::cout << "after assign target: " << target << std::endl;
 
-        // Change copy's grade and show orig unchanged
-        copy.decrementGrade(); // copy.grade++
+        copy.decrementGrade(); 
         std::cout << "after modifying copy: orig: " << orig << ", copy: " << copy << std::endl;
     } catch (std::exception &e) {
         std::cout << "Exception: " << e.what() << std::endl;

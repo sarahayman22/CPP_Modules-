@@ -6,12 +6,12 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:43 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/01 17:56:07 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/21 13:24:53 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"Form.hpp"
-#include "Bureaucrat.hpp" // full type needed here
+#include "Bureaucrat.hpp"
 #include <sstream>
 
 Form::Form(const std::string &name, int gradeSign, int gradeExe)
@@ -62,8 +62,7 @@ int Form::getGradeToExecute() const
 
 void Form::beSigned(Bureaucrat const &b)
  {
-     // Bureaucrat::getGrade() returns an int where 1 is highest
-     if (b.getGrade() > gradeSign)// numeric greater -> worse grade -> too low
+     if (b.getGrade() > gradeSign)
         throw GradeTooLowException();
     sign = true;
  }

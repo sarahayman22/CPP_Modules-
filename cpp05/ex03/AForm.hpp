@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:55 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/13 18:42:19 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:40:29 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include<iostream>
 #include <string>
 
-class Bureaucrat; // forward declaration to avoid circular include
+class Bureaucrat;
 
 class AForm
 {
@@ -46,7 +46,6 @@ class AForm
              const char* what() const throw();
         };
 
-        
         // Getters
         const std::string& getName() const;
         bool isSigned() const;
@@ -54,7 +53,7 @@ class AForm
         int getGradeToExecute() const;
 
         // Actions
-        void beSigned(Bureaucrat const &b); // throws GradeTooLowException if b's grade too low
+        void beSigned(Bureaucrat const &b);
         void execute(Bureaucrat const & executor) const;
 };
 std::ostream &operator<<(std::ostream &os, AForm const &f);

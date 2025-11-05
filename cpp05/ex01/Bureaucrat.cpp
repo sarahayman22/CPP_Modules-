@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 17:06:59 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/06 18:46:17 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/18 17:58:00 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &assign)
 Bureaucrat::~Bureaucrat()
 {
 }
+
 //getters
 const std::string &Bureaucrat::getName() const
 {
@@ -82,9 +83,7 @@ void Bureaucrat::signForm(Form &form) const
     {
         std::cout << this->getName() << "couldn't sign " << form.getName()
             << "because " << e.what() << std::endl;      
-    }
-    
-    
+    }  
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &b)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:34:23 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/13 14:43:50 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:58:15 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ static const int EXEC_GRADE  = 137;
 ShrubberyCreationForm::ShrubberyCreationForm()
     : AForm("ShrubberyCreationForm", SIGN_GRADE, EXEC_GRADE), target("default")
 {
+     std::cout << "ShrubberyCreationForm: default constructor\n";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& t)
     : AForm("ShrubberyCreationForm", SIGN_GRADE, EXEC_GRADE), target(t)
 {
+    std::cout << "ShrubberyCreationForm: constructor called\n";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
@@ -40,9 +42,10 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     return *this;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {}
+ShrubberyCreationForm::~ShrubberyCreationForm() {
+    std::cout << "ShrubberyCreationForm: destructor called\n";
+}
 
-// --- Helper function: recursive directory printing ---
 static void printDirectory(std::ofstream& out, const std::string& path, const std::string& prefix)
 {
     DIR* dir = opendir(path.c_str());
@@ -74,7 +77,6 @@ static void printDirectory(std::ofstream& out, const std::string& path, const st
     closedir(dir);
 }
 
-// --- Main execute action ---
 void ShrubberyCreationForm::executeAction() const
 {
     std::string filename = target + "_shrubbery";
@@ -84,8 +86,6 @@ void ShrubberyCreationForm::executeAction() const
         std::cerr << "ShrubberyCreationForm: could not create file '" << filename << "'\n";
         return;
     }
-
-    // Start recursion from current working directory
     printDirectory(outfile, ".", "");
 
     outfile.close();

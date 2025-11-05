@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:55 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/05 17:53:21 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/10/21 13:27:10 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include<iostream>
 #include <string>
 
-class Bureaucrat; // forward declaration to avoid circular include
+class Bureaucrat;
 
 class Form
 {
@@ -25,13 +25,11 @@ class Form
     const int gradeExe;
 
     public:
-    //    Form();
         Form(const std::string& name, const int gradeSign, const int gradeExe);
         Form(const Form &copy);
         Form& operator=(const Form &assign);
         ~Form();
 
-        // Exceptions
         class GradeTooHighException : public std::exception {
              const char* what() const throw();
          };
@@ -39,14 +37,13 @@ class Form
             const char* what() const throw();
         };
         
-        // Getters
         const std::string &getName() const;
         bool isSigned() const;
         int getGradeToSign() const;
         int getGradeToExecute() const;
 
         // Actions
-        void beSigned(Bureaucrat const &b); // throws GradeTooLowException if b's grade too low
+        void beSigned(Bureaucrat const &b);
 };
 std::ostream &operator<<(std::ostream &os, Form const &f);
 
