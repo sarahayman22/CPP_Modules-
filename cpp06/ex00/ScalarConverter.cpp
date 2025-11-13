@@ -6,172 +6,171 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:42 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/11/08 17:48:35 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/11/13 14:03:51 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "convert.cpp"
 #include "ScalarConverter.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <cctype>
-#include <cmath>    // Required for std::modf and std::fabs
-#include <limits>
+#include <limits>   
+#include <cstdlib>      
+#include <cerrno>
+#include <cmath>
 #include <iomanip>
 
 ScalarConverter::ScalarConverter() {}
-ScalarConverter::ScalarConverter(const ScalarConverter& src) { (void)src; }
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs) { (void)rhs; return *this; }
+ScalarConverter::ScalarConverter(const ScalarConverter&) {}
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter&) { return *this; }
 ScalarConverter::~ScalarConverter() {}
 
-void ScalarConverter::convert(const std::string& literal)
-{
-    if (literal.length() == 1 && !std::isdigit(literal[0]))
-    {
-        char c = literal[0];
-        double d = static_cast<double>(c);
-        printChar(d);
-        printInt(d);
-        printFloat(d);
-        printDouble(d);
-        return;
+bool isInt(const std::string& literal) {
+    char* endptr;
+    errno = 0;
+    long l = std::strtol(literal.c_str(), &endptr, 10);
+    if (*endptr != '\0') {
+        return false;
     }
-
-    char* end = NULL;
-    double d = std::strtod(literal.c_str(), &end);
-
-    if (end == literal.c_str() ||
-        (*end != '\0' && (*end != 'f' || end[1] != '\0')))
-    {
-        std::cout << "char: impossible\n";
-        std::cout << "int: impossible\n";
-        std::cout << "float: impossible\n";
-        std::cout << "double: impossible\n";
-        return;
+    if (errno == ERANGE || l > std::numeric_limits<int>::max() || l < std::numeric_limits<int>::min()) {
+        return false;
     }
-
-    printChar(d);
-    printInt(d);
-    printFloat(d);
-    printDouble(d);
+    return true;
 }
 
-void ScalarConverter::printChar(double d)
-{
-    std::cout << "char: ";
-
-    if (std::isnan(d) || std::isinf(d) ||
-        d < std::numeric_limits<char>::min() ||
-        d > std::numeric_limits<char>::max())
-    {
-        std::cout << "impossible\n";
-        return;
+bool isFloat(const std::string& literal) {
+    if (literal[literal.length() - 1] != 'f' || literal.length() == 1) {
+        return false;
+    }
+    if (literal == "nanf" || literal == "+inff" || literal == "-inff") {
+        return false;
     }
 
-    char c = static_cast<char>(d);
-
-    if (!std::isprint(c))
-    {
-        std::cout << "Non displayable\n";
-        return;
-    }
-
-    std::cout << "'" << c << "'\n";
-}
-
-void ScalarConverter::printInt(double d)
-{
-    std::cout << "int: ";
-
-    if (std::isnan(d) || std::isinf(d) ||
-        d < std::numeric_limits<int>::min() ||
-        d > std::numeric_limits<int>::max())
-    {
-        std::cout << "impossible\n";
-        return;
-    }
-
-    std::cout << static_cast<int>(d) << "\n";
-}
-
-void ScalarConverter::printFloat(double d)
-{
-    std::cout << "float: ";
-
-    if (std::isnan(d)) {
-        std::cout << "nanf" << std::endl;
-        return;
-    }
-    if (std::isinf(d)) {
-        if (d > 0)
-            std::cout << "inff" << std::endl;
-        else
-            std::cout << "-inff" << std::endl;
-        return;
-    }
-
-    float f = static_cast<float>(d);
-    double int_part;
+    char* endptr;
+    errno = 0;
+    std::strtof(literal.c_str(), &endptr);
     
-    // Check for "huge" or "tiny" numbers FIRST
-    // We define "huge" as >= 1,000,000 (1e6) or "tiny" as < 0.001.
-    // These numbers should use default/scientific notation.
-    if (std::fabs(f) >= 1e6f || (std::fabs(f) < 0.001f && f != 0.0f))
-    {
-        std::cout << std::setprecision(6) << f << "f" << std::endl;
+    return (*endptr == 'f' && *(endptr + 1) == '\0' && errno != ERANGE);
+}
+
+bool isDouble(const std::string& literal) {
+    if (literal.find('.') == std::string::npos) {
+        return false;
     }
-    // THEN: Check for "normal" whole numbers
-    // If it's not huge/tiny, check if it's a whole number.
-    else if (std::modf(f, &int_part) == 0.0f)
-    {
-        // Use std::fixed to print "42.0f", "0.0f", etc.
-        std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-        std::cout.unsetf(std::ios::fixed);
-        std::cout.precision(6);
+    if (literal[literal.length() - 1] == 'f') {
+        return false;
     }
-    // ELSE: It's a "normal" fractional number
-    else
-    {
-        // Use default notation for "4.2f"
-        std::cout << std::setprecision(6) << f << "f" << std::endl;
+    if (literal == "nan" || literal == "+inf" || literal == "-inf") {
+        return false;
+    }
+    char* endptr;
+    errno = 0;
+    std::strtod(literal.c_str(), &endptr);
+    return (*endptr == '\0' && errno != ERANGE);
+}
+
+ScalarConverter::e_type ScalarConverter::detectType(const std::string& literal) {
+    if (literal == "nan" || literal == "+inf" || literal == "-inf" ||
+        literal == "nanf" || literal == "+inff" || literal == "-inff") {
+        return SPECIAL;
+    }
+    if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'') {
+        return CHAR;
+    }
+    if (isInt(literal)) {
+        return INT;
+    }
+    if (isFloat(literal)) {
+        return FLOAT;
+    }
+    if (isDouble(literal)) {
+        return DOUBLE;
+    }
+    return INVALID;
+}
+
+void ScalarConverter::convert(const std::string& literal) {
+    e_type type = detectType(literal);
+
+    switch (type) {
+        case CHAR:
+            convertFromChar(literal);
+            break;
+        case INT:
+            convertFromInt(literal);
+            break;
+        case FLOAT:
+            convertFromFloat(literal);
+            break;
+        case DOUBLE:
+            convertFromDouble(literal);
+            break;
+        case SPECIAL:
+            convertFromSpecial(literal);
+            break;
+        case INVALID:
+        default:
+            std::cout << "Invalid input literal." << std::endl;
+            break;
     }
 }
 
-void ScalarConverter::printDouble(double d)
-{
+void ScalarConverter::printChar(char c, bool possible) {
+    std::cout << "char: ";
+    if (!possible) {
+        std::cout << "impossible" << std::endl;
+    } else if (!std::isprint(c)) {
+        std::cout << "Non displayable" << std::endl;
+    } else {
+        std::cout << "'" << c << "'" << std::endl;
+    }
+}
+
+void ScalarConverter::printInt(long l, bool possible) {
+    std::cout << "int: ";
+    if (!possible || l > std::numeric_limits<int>::max() || l < std::numeric_limits<int>::min()) {
+        std::cout << "impossible" << std::endl;
+    } else {
+        std::cout << static_cast<int>(l) << std::endl;
+    }
+}
+
+void ScalarConverter::printFloat(float f, bool possible) {
+    std::cout << "float: ";
+    if (!possible) {
+        std::cout << "impossible" << std::endl;
+        return;
+    }
+    if (std::isnan(f)) {
+        std::cout << "nanf" << std::endl;
+    } else if (std::isinf(f)) { 
+        std::cout << (f > 0 ? "+inff" : "-inff") << std::endl;
+    } else {
+        float integral;
+        float fractional = std::modf(f, &integral);
+        if (fractional == 0.0f && std::fabs(f) < 1000000.0f) {
+            std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+        } else {
+            std::cout << std::noshowpoint << f << "f" << std::endl;
+        }
+    }
+}
+
+void ScalarConverter::printDouble(double d, bool possible) {
     std::cout << "double: ";
-
-    if (std::isnan(d))
-    {
-        std::cout << "nan\n";
+    if (!possible) {
+        std::cout << "impossible" << std::endl;
         return;
     }
-    if (std::isinf(d))
-    {
-        if (d > 0) std::cout << "inf\n";
-        else std::cout << "-inf\n";
-        return;
-    }
-
-    double int_part;
-
-    // Apply the same logic as printFloat
-    // Check for "huge" or "tiny" numbers FIRST.
-    if (std::fabs(d) >= 1e6 || (std::fabs(d) < 0.001 && d != 0.0))
-    {
-        std::cout << std::setprecision(6) << d << std::endl;
-    }
-    // THEN: Check for "normal" whole numbers.
-    else if (std::modf(d, &int_part) == 0.0)
-    {
-        // Use std::fixed to print "42.0"
-        std::cout << std::fixed << std::setprecision(1) << d << std::endl;
-        std::cout.unsetf(std::ios::fixed);
-        std::cout.precision(6);
-    }
-    // ELSE: It's a "normal" fractional number.
-    else
-    {
-        // Use default notation for "4.2"
-        std::cout << std::setprecision(6) << d << std::endl;
+    if (std::isnan(d)) {
+        std::cout << "nan" << std::endl;
+    } else if (std::isinf(d)) {
+        std::cout << (d > 0 ? "+inf" : "-inf") << std::endl;
+    } else {
+        double integral;
+        double fractional = std::modf(d, &integral);
+        if (fractional == 0.0 && std::fabs(d) < 1000000.0) {
+            std::cout << std::fixed << std::setprecision(1) << d << std::endl;
+        } else {
+            std::cout << std::noshowpoint << d << std::endl;
+        }
     }
 }

@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:03:46 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/11/08 13:27:33 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/11/10 13:52:08 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
 		std::cerr << "Usage: ./convert <literal>" << std::endl;
 		return 1;
 	}
-
+	//ScalarConverter myConverter; // COMPILE ERROR!
 	// Pass the first argument (argv[1]) to the static convert method
 	ScalarConverter::convert(argv[1]);
 	return 0;
