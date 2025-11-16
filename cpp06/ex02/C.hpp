@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 15:15:36 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/11/15 09:52:45 by saabo-sh         ###   ########.fr       */
+/*   Created: 2025/11/15 09:50:04 by saabo-sh          #+#    #+#             */
+/*   Updated: 2025/11/15 09:51:05 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-#define DATA_HPP
 
+#ifndef C_HPP
+#define C_HPP
 
-#include <iostream>
-#include <string>
+#include "Base.hpp"
 
-struct Data
-{
-    std::string s1;
-    int         n;
-    std::string s2;
-};
+class C : public Base
+{};
 
 #endif

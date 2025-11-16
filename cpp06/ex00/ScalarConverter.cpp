@@ -6,17 +6,13 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:42 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/11/13 14:03:51 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:53:31 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "convert.cpp"
 #include "ScalarConverter.hpp"
-#include <limits>   
-#include <cstdlib>      
-#include <cerrno>
-#include <cmath>
-#include <iomanip>
+
 
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter&) {}

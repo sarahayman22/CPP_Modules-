@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saabo-sh <saabo-sh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:34:23 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/10/25 16:58:15 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:44:56 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,12 @@ static void printDirectory(std::ofstream& out, const std::string& path, const st
     struct dirent* entry;
     while ((entry = readdir(dir)) != NULL) {
         std::string name = entry->d_name;
-
-        // Skip "." and ".."
         if (name == "." || name == "..")
             continue;
 
         std::string fullPath = path + "/" + name;
 
-        struct stat info;
+        struct stat info;  
         if (stat(fullPath.c_str(), &info) != 0)
             continue;
 
