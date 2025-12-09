@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 16:38:56 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/12/07 17:34:01 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:58:37 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int main (int argc, char **argv)
     }
 
     BitcoinExchange btc;
-    btc.loadDatabase(argv[1]);
+    btc.loadDatabase("data.csv");
+    btc.processInputFile(argv[1]);
 }
