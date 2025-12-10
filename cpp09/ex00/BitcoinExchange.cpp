@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:57:35 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/12/09 17:35:55 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:57:34 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <sstream>
 #include <cstdlib>
 #include <cctype>
+
+BitcoinExchange::BitcoinExchange() {}
 
 static void trim(std::string &s)
 {
@@ -79,9 +81,6 @@ bool BitcoinExchange::isValidNumber(const std::string &s) const
     }
     return true;
 }
-
-
-BitcoinExchange::BitcoinExchange() {}
 
 void BitcoinExchange::loadDatabase(const std::string &filename)
 {
