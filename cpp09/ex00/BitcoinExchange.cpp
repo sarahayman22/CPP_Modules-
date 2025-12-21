@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:57:35 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/12/10 16:57:34 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2025/12/17 17:14:35 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,21 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
 
     for (size_t i = 0; i < d.size(); i++)
         if (!isdigit(d[i])) return false;
-
+    
+    int year  = atoi(y.c_str());
     int month = atoi(m.c_str());
     int day = atoi(d.c_str());
-
-    if (month < 1 || month > 12) return false;
-    if (day < 1 || day > 31) return false;
-
+    
+    if (month < 1 || month > 12)
+        return false;
+    
+    int daysInMonth[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+    
+    bool leapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    if (leapYear) 
+        daysInMonth[1] = 29;
+    if (day < 1 || day > daysInMonth[month - 1])
+        return false;
     return true;
 }
 
