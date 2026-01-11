@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:52:28 by saabo-sh          #+#    #+#             */
-/*   Updated: 2026/01/08 17:52:50 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2026/01/11 15:22:02 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ PmergeMe::PmergeMe(const std::vector<int>& v, const std::deque<int>& q)
     createPairsVector();
     sortPairsBySecond();
     buildMainChain();
-    insertPending();   // ← هذا ضروري
+    insertPending();  
         _v = _mainChain;   
 }
 
@@ -54,16 +54,9 @@ void PmergeMe::sortPairsBySecond()
         return;
     for (size_t size = 1; size < _pairs.size(); size *= 2)
     {
-//   What does left mean?
-// left = start index of two blocks to merge
-// Each iteration merges two blocks of size size
         for (size_t left = 0; left+size < _pairs.size(); left += 2 * size)
         {
-            // mid = end of the left block
             size_t mid = left + size -1;
-//right = end of the right block
-// Why min?
-// Prevents out-of-bounds access when size isn’t power of 2
             size_t right = std::min(left + 2 * size - 1, _pairs.size() - 1);
             // [left .. mid] + [mid+1 .. right]
             mergePairs(left, mid, right);
@@ -77,7 +70,6 @@ void PmergeMe::mergePairs(size_t left, size_t mid, size_t right)
     std::vector<std::pair< int,int> > temp;
     size_t i = left;
     size_t j = mid + 1;
-    // As long as both blocks still have elements:
     while (i <= mid && j <= right)
     {
         //_pairs[i].second That’s the larger element of the Ford–Johnson pair
@@ -96,20 +88,6 @@ void PmergeMe::mergePairs(size_t left, size_t mid, size_t right)
     for (size_t k = 0; k < temp.size(); k++)
         _pairs[left + k] = temp[k];    
 }
-
-// Why Ford–Johnson does this
-
-// Classic merge sort:
-
-// Sorts everything at once
-
-// Ford–Johnson:
-
-// Sorts half the elements
-
-// Inserts the rest optimally
-
-// This reduces comparisons — that’s the magic.
 void PmergeMe::buildMainChain()
 {
     _mainChain.clear();
@@ -122,13 +100,6 @@ void PmergeMe::buildMainChain()
     }
     if(hasStraggler)
         _pending.push_back(straggler);
-
-        // What this guarantees (important)
-// ✔ _mainChain is already sorted
-// ✔ _pending contains only elements to be inserted later
-// ✔ Straggler is handled correctly
-// ✔ No sorting is performed here
-// ✔ Ford–Johnson logic is respected
 }
 
 void PmergeMe::binaryInsert(int value)
@@ -188,16 +159,6 @@ void PmergeMe::insertPending()
     }
 }
 
-
-void PmergeMe::printBefore() const
-{
-    std::cout << "Before: ";
-    for (size_t i = 0; i < _v.size(); i++)
-        std::cout << _v[i] << " ";
-    std::cout << std::endl;
-}
-
-
 void PmergeMe::printAfter() const
 {
     std::cout << "After: ";
@@ -205,32 +166,6 @@ void PmergeMe::printAfter() const
         std::cout << _v[i] << " ";
     std::cout << std::endl;
 }
-
-
-/* ===== DEBUG ONLY ===== */
-void PmergeMe::debugPrintPairs() const
-{
-    std::cout << "Pairs:" << std::endl;
-    for (size_t i = 0; i < _pairs.size(); i++)
-        std::cout << "(" << _pairs[i].first << ", " << _pairs[i].second << ")" << std::endl;
-
-    if (hasStraggler)
-        std::cout << "Straggler: " << straggler << std::endl;
-}
-
-void PmergeMe::debugPrintMainChain() const
-{
-    std::cout << "Main chain: ";
-    for (size_t i = 0; i < _mainChain.size(); i++)
-        std::cout << _mainChain[i] << " ";
-    std::cout << std::endl;
-
-    std::cout << "Pending: ";
-    for (size_t i = 0; i < _pending.size(); i++)
-        std::cout << _pending[i] << " ";
-    std::cout << std::endl;
-}
-
 
 /////////////////////////////queue//////////////////////////////////////
 
@@ -250,8 +185,6 @@ void PmergeMe::makePairsDeque(const std::deque<int>& input)
         _pairsD.push_back(std::make_pair(a, b));
         i += 2;
     }
-
-    // odd element
     if (i < input.size())
         _pairsD.push_back(std::make_pair(input[i], -1));
 }
@@ -367,4 +300,41 @@ void PmergeMe::printAfterDeque() const
     for (size_t i = 0; i < _mainChainD.size(); i++)
         std::cout << _mainChainD[i] << " ";
     std::cout << std::endl;
+}
+
+///////////////////////////////////////////////////////time/////////////////////////////////
+
+double PmergeMe::sortVectorWithTime()
+{
+    clock_t start;
+    clock_t end;
+
+    start = clock();
+
+    createPairsVector();
+    sortPairsBySecond();
+    buildMainChain();
+    insertPending();
+
+    end = clock();
+
+    return static_cast<double>(end - start) * 1000000.0 / CLOCKS_PER_SEC;
+}
+
+
+double PmergeMe::sortDequeWithTime()
+{
+    clock_t start;
+    clock_t end;
+
+    start = clock();
+
+    makePairsDeque(_q);
+    sortPairsDeque();
+    buildMainChainDeque();
+    insertPendingDeque();
+
+    end = clock();
+
+    return static_cast<double>(end - start) * 1000000.0 / CLOCKS_PER_SEC;
 }

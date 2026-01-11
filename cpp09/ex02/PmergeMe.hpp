@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:52:20 by saabo-sh          #+#    #+#             */
-/*   Updated: 2026/01/08 18:04:37 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2026/01/11 15:21:42 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 #include <utility>
 #include <cstddef>
 #include <iostream>
+#include <ctime>
 
 class PmergeMe 
 {
 private:
-    // ===== Vector version =====
+ 
     std::vector<int> _v;
     std::vector<std::pair<int,int> > _pairs;
     std::vector<int> _mainChain;
@@ -37,7 +38,6 @@ private:
     void binaryInsert(int value);
     void insertPending();
 
-    // ===== Deque version =====
     std::deque<int> _q;
     std::deque<std::pair<int,int> > _pairsD;
     std::deque<int> _mainChainD;
@@ -51,23 +51,20 @@ private:
     void insertPendingDeque();
 
 public:
-    // ===== Constructor =====
     PmergeMe(const std::vector<int>& v, const std::deque<int>& q);
 
-    // ===== Print functions =====
-    void printBefore() const;
     void printAfter() const;
     void printAfterDeque() const;
-
-    // ===== Debug functions =====
-    void debugPrintPairs() const;
-    void debugPrintMainChain() const;
-
-    // ===== Public wrappers for deque testing =====
+    
     void makePairsDequePublic(const std::deque<int>& input) { makePairsDeque(input); }
     void sortPairsDequePublic() { sortPairsDeque(); }
     void buildMainChainDequePublic() { buildMainChainDeque(); }
     void insertPendingDequePublic() { insertPendingDeque(); }
+        
+    double sortVectorWithTime();
+    double sortDequeWithTime();
+
+
 };
 
 #endif

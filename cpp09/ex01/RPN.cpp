@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:18:00 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/12/23 17:03:02 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2026/01/11 15:12:51 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void RPN::solution(std::string input)
 			else if (c == '/')
                 divide();
 		} else {
-			std::cout << "Error: Invalid input" << std::endl;
+			std::cout << "Error" << std::endl;
 			return;
 		}
 	}

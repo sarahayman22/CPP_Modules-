@@ -6,7 +6,7 @@
 /*   By: saabo-sh <saabo-sh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:57:35 by saabo-sh          #+#    #+#             */
-/*   Updated: 2025/12/17 17:14:35 by saabo-sh         ###   ########.fr       */
+/*   Updated: 2026/01/11 14:46:05 by saabo-sh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
     
     if (month < 1 || month > 12)
         return false;
-    
     int daysInMonth[12]={31,28,31,30,31,30,31,31,30,31,30,31};
     
     bool leapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
@@ -60,6 +59,7 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
         daysInMonth[1] = 29;
     if (day < 1 || day > daysInMonth[month - 1])
         return false;
+        
     return true;
 }
 
@@ -71,10 +71,10 @@ bool BitcoinExchange::isValidNumber(const std::string &s) const
     size_t i = 0;
     bool dot = false;
 
-    if (s[0] == '-') // allow negative
+    if (s[0] == '-')
         i = 1;
 
-    if (i == s.size()) // only "-" is invalid
+    if (i == s.size())
         return false;
 
     for (; i < s.size(); i++)
@@ -100,7 +100,8 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
     }
 
     std::string line;
-    std::getline(file, line); // skip header
+    
+    std::getline(file, line);
 
     while (std::getline(file, line))
     {
@@ -126,7 +127,7 @@ void BitcoinExchange::processInputFile(const std::string &filename)
     }
 
     std::string line;
-    std::getline(file, line); // skip header
+    std::getline(file, line);
 
     while (std::getline(file, line))
     {
@@ -168,7 +169,6 @@ void BitcoinExchange::processInputFile(const std::string &filename)
             continue;
         }
 
-        // Finding correct rate
         std::map<std::string, float>::iterator it = _db.lower_bound(date);
 
         if (it == _db.end())
